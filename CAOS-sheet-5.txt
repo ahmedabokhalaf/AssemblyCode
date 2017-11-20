@@ -1,0 +1,338 @@
+Problem (1)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+.DATA
+	x DD ?
+	y DD ?
+	z DD ?
+	w DD 2
+	prompt1 Byte "Enter X", 0
+	prompt2 Byte "Enter Y", 0
+	prompt3 Byte "Enter Z", 0
+	string Byte 40 Dup(?)
+	result Byte "The Result Is", 0
+	res Byte 11 Dup(?)
+.CODE
+_MainProc PROC
+	input prompt1, string, 40
+	atod string
+	mov x, eax
+	input prompt2, string, 40
+	atod string
+	mov y, eax
+	input prompt3, string, 40
+	atod string
+	mov z, eax
+	imul eax, w
+	neg eax
+	inc eax
+	add eax, y
+	add eax, x
+	neg eax
+	dtoa res, eax
+	output result, res
+	mov eax, 0
+	ret
+_MainProc ENDP
+END
+/////////////////////////////////////////////////////////
+Problem (2)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+.DATA
+	w DD 2
+	x DD ?
+	y DD ?
+	z DD ?
+	prompt1 Byte "Enter X", 0
+	prompt2 Byte "Enter Y", 0
+	prompt3 Byte "Enter Z", 0
+	string Byte 40 Dup(?)
+	result Byte "The Result Is", 0
+	res Byte 11 Dup(?)
+.CODE
+_MainProc PROC
+	input prompt1, string, 40
+	atod string
+	mov x, eax
+	input prompt2, string, 40
+	atod string
+	add eax, x
+	imul eax, w
+	mov ebx, eax
+	input prompt3, string, 40
+	atod string
+	;mov z, eax
+	add ebx, eax
+	dtoa res, ebx
+	output result, res
+	mov ebx, 0
+	ret
+_MainProc ENDP
+END
+////////////////////////////////////////////////////////
+Problem (3)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+.DATA
+	x DD ?
+	y DD 2
+	prompt1 Byte "Enter Length Of Rectangle??", 0
+	prompt2 Byte "Enter Width Of Rectangle??", 0
+	string Byte 40 Dup(?)
+	result Byte "The Perimeter Of Rectangle Is", 0
+	res Byte 11 Dup(?)
+.CODE
+_MainProc PROC
+	input prompt1, string, 40
+	atod string
+	mov x, eax
+	input prompt2, string, 40
+	atod string
+	add eax, x
+	imul eax, y
+	dtoa res, eax
+	output result, res
+	mov eax, 0
+	ret
+_MainProc ENDP
+END
+////////////////////////////////////////////////////////
+Problem (4)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+cr equ 0dh
+lf equ 0ah
+.DATA
+	h DD 100d
+	pen DD ?
+	nic DD ?
+	dim DD ?
+	quar DD ?
+	fifc DD ?
+	dol DD ?
+	
+	pp Byte "Enter Number of Pennies", 0
+	pn Byte "Enter Number of Nickels", 0
+	pd Byte "Enter Number of Dimes", 0
+	pq Byte "Enter Number of Quarters", 0
+	pf Byte "Enter Number of Fifty-cent", 0
+	pl Byte "Enter Number of Dollar Coins", 0
+
+	string Byte 40 Dup(?)
+
+	lb Byte "Result is", 0
+	ans Byte "Number of Coines = "
+	res Byte 11 Dup(?)
+	Byte " coines"
+		Byte cr, lf, "Remainder of Coines = "
+	rem Byte 11 Dup(?)
+.CODE
+_MainProc PROC
+	input pp, string, 40
+	atod string
+	mov pen, eax
+	imul eax, pen, 1
+	mov edx, 0
+	idiv h
+	mov ecx, eax
+	mov ebx, edx
+	input pn, string, 40
+	atod string
+	mov nic, eax
+	imul eax, nic, 5
+	mov edx, 0
+	idiv h
+	add ecx, eax
+	add ebx, edx
+	input pd, string, 40
+	atod string
+	mov dim, eax
+	imul eax, dim, 10
+	mov edx, 0
+	idiv h
+	add ecx, eax
+	add ebx, edx
+	input pq, string, 40
+	atod string
+	mov quar, eax
+	imul eax, quar, 25
+	mov edx, 0
+	idiv h
+	add ecx, eax
+	add ebx, edx
+	input pf, string, 40
+	atod string
+	mov fifc, eax
+	imul eax, fifc, 50
+	mov edx, 0
+	idiv h
+	add ecx, eax
+	add ebx, edx
+	input pl, string, 40
+	atod string
+	mov dol, eax
+	add ecx, eax
+	dtoa res, ecx
+	dtoa rem, ebx
+	output lb, ans
+	mov eax, 0
+	ret
+_MainProc ENDP
+END
+////////////////////////////////////////////////////////
+Problem (5)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+cr equ 0dh
+lf equ 0ah
+.DATA
+	a Word 4
+	g1 DD ?
+	g2 DD ?
+	g3 DD ?
+	g4 DD ?
+	prompt1 Byte "Enter 1st Grade", 0
+	prompt2 Byte "Enter 2nd Grade", 0
+	prompt3 Byte "Enter 3rd Grade", 0
+	prompt4 Byte "Enter 4th Grade", 0
+	string Byte 40 Dup(?)
+	result1 Byte "The Sumission Is", 0
+	result2 Byte "The Avarage Is", 0
+	result3 Byte "The Remainder IS", 0
+	sum Byte 11 Dup(?)
+	avg Byte 11 Dup(?)
+	r Byte 11 Dup(?)
+.CODE
+_MainProc PROC
+	input prompt1, string, 40
+	atod string
+	mov g1, eax
+	input prompt2, string, 40
+	atod string
+	add eax, g1
+	mov g2, eax
+	input prompt3, string, 40
+	atod string
+	add eax, g2
+	mov g3, eax
+	input prompt4, string, 40
+	atod string
+	add eax, g3
+	dtoa sum, eax
+	output result1, sum
+	mov edx, 0
+	div a
+	dtoa avg, eax
+	output result2, avg
+	dtoa r, edx
+	output result3, r
+	mov eax, 0
+	ret
+_MainProc ENDP
+END
+////////////////////////////////////////////////////////
+Problem (6)
+.586
+.MODEL FLAT
+INCLUDE	io.h
+.STACK 4096
+cr equ 0dh
+lf equ 0ah
+.DATA
+	g1 DD ?
+	w1 DD ?
+	g2 DD ?
+	w2 DD ?
+	g3 DD ?
+	w3 DD ?
+	g4 DD ?
+	w4 DD ?
+	p1 Byte "Grade1? ", 0
+	pr1 Byte "Weigth1? ", 0
+	
+	p2 Byte "Grade2?", 0
+	pr2 Byte "Weigth2? ", 0
+	
+	p3 Byte "Grade3?", 0
+	pr3 Byte "Weigth3? ", 0
+	
+	p4 Byte "Grade4?", 0
+	pr4 Byte "Weigth4? ", 0
+	
+	string Byte 40 Dup(?)
+	
+	lb Byte "Result is", 0
+	
+	answer Byte "Weigthed Sum: "
+	ws Byte 11 Dup(?)
+		Byte cr, lf, "Sum Of Weights: "
+	sw Byte 11 Dup(?)
+		Byte cr, lf, "Weighted Average: "
+	wa Byte 11 Dup(?), 0
+.CODE
+_MainProc PROC
+	input p1, string, 40
+	atod string
+	mov g1, eax
+	input pr1, string, 40
+	atod string
+	mov w1, eax
+	mul g1
+	mov ecx, eax
+	
+	input p2, string, 40
+	atod string
+	mov g2, eax
+	input pr2, string, 40
+	atod string
+	mov w2, eax
+	mul g2
+	add ecx, eax
+
+	input p3, string, 40
+	atod string
+	mov g3, eax
+	input pr3, string, 40
+	atod string
+	mov w3, eax
+	mul g3
+	add ecx, eax
+
+	input p4, string, 40
+	atod string
+	mov g4, eax
+	input pr4, string, 40
+	atod string
+	mov w4, eax
+	mul g4
+	add ecx, eax
+	dtoa ws, ecx
+	
+	mov eax, 0
+	add eax, w1
+	add eax, w2
+	add eax, w3
+	add eax, w4
+	dtoa sw, eax
+	
+	mov edx, 0
+	xchg eax, ecx
+	div ecx
+	dtoa wa, eax
+
+	output lb, answer
+	mov eax, 0
+	ret
+_MainProc ENDP
+END
